@@ -7,6 +7,7 @@ import csv
 
 csvpath = os.path.join('Resources', 'budget_data.csv')
 
+
 # # Method 1: Plain Reading of CSV files
 # with open(csvpath, 'r') as file_handler:
 #     lines = file_handler.read()
@@ -56,35 +57,63 @@ with open(csvpath) as csv_file:
 
         
 
-        
+        # Monthly_Change is an integer
+        # check if Greatest_Montrly_chane[1] is also an integer
+        # quick print statment to checkinformaiton that Greatest_Monthly_Change[1] is returning
+        # print(Greatest_Monthly_Change[1])
 
         if Monthly_Change > Greatest_Monthly_Change[1]:
-            Greatest_Monthly_Change[0] = row[0]                    
+            # make sure able  to access the month value
+            # print("Month: " + row[0])
+            Greatest_Monthly_Change[0] = row[0]    
+            # maing sure that the greatest monthly change changed to match  
+            # print(Greatest_Monthly_Change[0])              
 
-            Greatest_Monthly_Change = Monthly_Change
+            Greatest_Monthly_Change[1] = Monthly_Change
+            #make sure passing in correct value
+            # print(Monthly_Change)
+            # print(Greatest_Monthly_Change[1])
 
         if Monthly_Change < Least_Monthly_Change[1]:
             
             Least_Monthly_Change[0] = row[0]
          
-            Least_Monthly_Change = Monthly_Change
+            Least_Monthly_Change[1] = Monthly_Change
         
 
-Ave_Month_Change = sum(net_change)/len(net_change)      
+Ave_Month_Change = sum(net_change)/len(net_change) 
+
+
+print('Financial Analysis')
+
+print('-----------------------')
 
     
 
 
-print(Month_count)
+print(f"Total Month: {Month_count}")
+print(f"Total Profit: {Total_Profit}")
+# print(Total_Profit)
 
-print(Total_Profit)
+print(f'Average Monthly Change:{Ave_Month_Change}')
 
-print(Ave_Month_Change)
+print(f' Greatest increase in Profit:{Greatest_Monthly_Change}')
 
-print(Greatest_Monthly_Change)
+print(f'Greatest Decrease in Profit:{Least_Monthly_Change}')
 
-print(Least_Monthly_Change)
+file1 = os.path.join('Analysis','budget_analysis.txt')
 
+
+
+result = (
+    f'Financial Analysis \n'
+    f'-----------------------\n'
+    f'Total Month: {Month_count}\n'
+    f'Total Profit: {Total_Profit}\n'
+    f'Average Monthly Change:{Ave_Month_Change}\n'
+    f'Greatest increase in Profit:{Greatest_Monthly_Change}\n'
+    f'Greatest Decrease in Profit:{Least_Monthly_Change}\n')
                
-    
+with open(file1,'w') as txt_file:
+    txt_file.write(result)   
 
